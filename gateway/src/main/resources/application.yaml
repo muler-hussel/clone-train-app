@@ -8,3 +8,11 @@ spring:
           predicates:
             - Path=/member/**
           uri: http://127.0.0.1:8001
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowCredentials: true #允许携带cookie
+            allowedHeaders: '*' #允许携带的头信息
+            allowedMethods: '*' #允许的请求方式
+            allowedOriginPatterns: '*' #允许请求来源
+            maxAge: 3600 #跨域检测有效期
