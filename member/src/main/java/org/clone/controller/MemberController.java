@@ -8,10 +8,7 @@ import org.clone.request.MemberSendCodeReq;
 import org.clone.response.CommonResponse;
 import org.clone.response.MemberLoginRes;
 import org.clone.service.MemberService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/member")
@@ -19,6 +16,14 @@ public class MemberController {
 
     @Resource
     private MemberService memberService;
+
+    @GetMapping("/count")
+    public CommonResponse<Integer> count() {
+        int count = memberService.count();
+        CommonResponse<Integer> commonResp = new CommonResponse<>();
+        commonResp.setContent(count);
+        return commonResp;
+    }
 
     @PostMapping("/register")
     public CommonResponse<Long> register(@Valid MemberRegisterReq req) {

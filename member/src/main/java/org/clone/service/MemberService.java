@@ -12,6 +12,7 @@ import org.clone.request.MemberLoginReq;
 import org.clone.request.MemberRegisterReq;
 import org.clone.request.MemberSendCodeReq;
 import org.clone.response.MemberLoginRes;
+import org.clone.util.JwtUtil;
 import org.clone.util.SnowUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,8 +88,9 @@ public class MemberService {
         if (!"8888".equals(code)) {
             throw new BusinessException(MEMBER_MOBILE_CODE_ERROR);
         }
-
         MemberLoginRes memberLoginRes = BeanUtil.copyProperties(memberDB, MemberLoginRes.class);
+        String token = JwtUtil.createToken(memberLoginRes.getId(), mobile);
+        memberLoginRes.setToken(token);
         return memberLoginRes;
     }
 
@@ -101,5 +103,9 @@ public class MemberService {
         } else {
            return list.get(0);
         }
+    }
+
+    public int count() {
+        return Math.toIntExact(memberMapper.countByExample(null));
     }
 }

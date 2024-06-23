@@ -12,7 +12,7 @@
         <a-layout-content
             :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          Content
+          members: {{ count }}
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -20,10 +20,11 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import {defineComponent, ref} from 'vue';
 import TheHeaderView from "@/components/TheHeader";
 import TheSiderView from "@/components/TheSider";
-
+import axios from "axios";
+import {notification} from "ant-design-vue";
 
 export default defineComponent({
   components: {
@@ -31,7 +32,9 @@ export default defineComponent({
     TheHeaderView,
   },
   setup() {
+    const count = ref(0);
     return {
+      count
     };
   },
 });
