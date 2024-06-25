@@ -20,4 +20,33 @@ Content-Type: application/json
   "mobile":"12345000001",
   "code": "8888"
 }
+
+> {%
+ client.log(JSON.stringify(response.body));
+ client.log(JSON.stringify(response.body.content.token));
+ client.global.set("token", response.body.content.token);
+ %}
+###
+
+POST http://localhost:8000/member/passenger/save
+Content-Type: application/json
+token: {{token}}
+
+{
+  "name": "test",
+  "idCard": "123",
+  "type": "1"
+}
+###
+
+GET http://localhost:8000/member/passenger/query-list?page=1&size=2
+Accept: application/json
+token: {{token}}
+
+###
+
+DELETE http://localhost:8000/member/passenger/delete/1804910952462815232
+Accept: application/json
+token: {{token}}
+
 ###

@@ -72,7 +72,7 @@ export default defineComponent({
         if (data.success) {
           notification.success({ description: 'Login successfully'});
           //跳到控制台
-          router.push("/");
+          router.push("/welcome");
           store.commit("setMember", data.content);
         } else {
           notification.error({ description: data.message });
