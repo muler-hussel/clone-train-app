@@ -22,9 +22,9 @@
         </a-space>
       </template>
       <template v-else-if="column.dataIndex === 'type'">
-        <span v-for="item in PASSENGER_TYPE_ARRAY" :key="item.key">
-          <span v-if="item.key === record.type">
-            {{item.value}}
+        <span v-for="item in PASSENGER_TYPE_ARRAY" :key="item.code">
+          <span v-if="item.code === record.type">
+            {{item.desc}}
           </span>
         </span>
       </template>
@@ -44,8 +44,8 @@
       </a-form-item>
       <a-form-item label="Type">
         <a-select v-model:value="passenger.type">
-          <a-select-option v-for="item in PASSENGER_TYPE_ARRAY" :key="item.key">
-            {{item.value}}
+          <a-select-option v-for="item in PASSENGER_TYPE_ARRAY" :key="item.code">
+            {{item.desc}}
           </a-select-option>
         </a-select>
       </a-form-item>
