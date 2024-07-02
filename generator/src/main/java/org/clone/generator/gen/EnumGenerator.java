@@ -2,7 +2,9 @@ package org.clone.generator.gen;
 
 
 import cn.hutool.core.util.StrUtil;
-import org.clone.member.enums.PassengerTypeEnum;
+import org.clone.business.enums.SeatColEnum;
+import org.clone.business.enums.SeatTypeEnum;
+import org.clone.business.enums.TrainTypeEnum;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnumGenerator {
-    // static String path = "web/src/assets/js/enums.js";
+    //static String path = "web/src/assets/js/enums.js";
     static String path = "admin/src/assets/js/enums.js";
 
     public static void main(String[] args) {
@@ -22,11 +24,11 @@ public class EnumGenerator {
         StringBuffer bufferArray = new StringBuffer();
         long begin = System.currentTimeMillis();
         try {
-            toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
-            /*toJson(TrainTypeEnum.class, bufferObject, bufferArray);
+            //toJson(PassengerTypeEnum.class, bufferObject, bufferArray);
+            toJson(TrainTypeEnum.class, bufferObject, bufferArray);
             toJson(SeatTypeEnum.class, bufferObject, bufferArray);
             toJson(SeatColEnum.class, bufferObject, bufferArray);
-            toJson(ConfirmOrderStatusEnum.class, bufferObject, bufferArray);*/
+            //toJson(ConfirmOrderStatusEnum.class, bufferObject, bufferArray);
 
             StringBuffer buffer = bufferObject.append("\r\n").append(bufferArray);
             writeJs(buffer);

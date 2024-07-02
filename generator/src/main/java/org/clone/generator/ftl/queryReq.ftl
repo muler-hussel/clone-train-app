@@ -1,6 +1,6 @@
 package org.clone.${module}.req;
 
-import org.clone.common.req.PageReq;
+import org.clone.common.request.PageReq;
 
 public class ${Domain}QueryReq extends PageReq {
 

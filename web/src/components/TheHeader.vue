@@ -2,10 +2,11 @@
   <a-layout-header class="header">
     <div class="logo" />
     <div style="float: right; color: white;">
-      {{member.mobile}} &nbsp;&nbsp;
-      <router-link to="/login" style="color: white">
-        Exit
-      </router-link>
+      <div class="logo">
+        <router-link to="/welcome">
+          Train
+        </router-link>
+      </div>
     </div>
     <a-menu
         v-model:selectedKeys="selectedKeys"
@@ -52,5 +53,10 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-</style>
+.logo {
+  float: left;
+  height: 31px;
+  width: 150px;
+  color: white;
+  font-size: 20px;
+}</style>

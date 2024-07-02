@@ -1,8 +1,8 @@
 package org.clone.${module}.controller.admin;
 
-import org.clone.context.org.clone.common.LoginMemberContext;
-import org.clone.common.resp.CommonResp;
-import org.clone.common.resp.PageResp;
+import org.clone.common.context.LoginMemberContext;
+import org.clone.common.response.CommonResponse;
+import org.clone.common.response.PageRes;
 import org.clone.${module}.req.${Domain}QueryReq;
 import org.clone.${module}.req.${Domain}SaveReq;
 import org.clone.${module}.resp.${Domain}QueryResp;
@@ -19,20 +19,20 @@ public class ${Domain}AdminController {
     private ${Domain}Service ${domain}Service;
 
     @PostMapping("/save")
-    public CommonResp<Object> save(@Valid @RequestBody ${Domain}SaveReq req) {
+    public CommonResponse<Object> save(@Valid @RequestBody ${Domain}SaveReq req) {
         ${domain}Service.save(req);
-        return new CommonResp<>();
+        return new CommonResponse<>();
     }
 
     @GetMapping("/query-list")
-    public CommonResp<PageResp<${Domain}QueryResp>> queryList(@Valid ${Domain}QueryReq req) {
-        PageResp<${Domain}QueryResp> list = ${domain}Service.queryList(req);
-        return new CommonResp<>(list);
+    public CommonResponse<PageRes<${Domain}QueryResp>> queryList(@Valid ${Domain}QueryReq req) {
+        PageRes<${Domain}QueryResp> list = ${domain}Service.queryList(req);
+        return new CommonResponse<>(list);
     }
 
     @DeleteMapping("/delete/{id}")
-    public CommonResp<Object> delete(@PathVariable Long id) {
+    public CommonResponse<Object> delete(@PathVariable Long id) {
         ${domain}Service.delete(id);
-        return new CommonResp<>();
+        return new CommonResponse<>();
     }
 }

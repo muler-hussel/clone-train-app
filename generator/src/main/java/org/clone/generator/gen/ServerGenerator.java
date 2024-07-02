@@ -18,7 +18,7 @@ public class ServerGenerator {
     static String vuePath = "admin/src/views/main/";
     static String serverPath = "[module]/src/main/java/org/clone/[module]/";
 
-    static String pomPath = "org/clone/generator/pom.xml";
+    static String pomPath = "generator/pom.xml";
     static String module = "";
     static {
         new File(serverPath).mkdirs();
@@ -35,7 +35,7 @@ public class ServerGenerator {
         System.out.println("servicePath: " + serverPath);
 
         // 读取table节点
-        Document document = new SAXReader().read("org/clone/generator/" + generatorPath);
+        Document document = new SAXReader().read("generator/" + generatorPath);
         Node table = document.selectSingleNode("//table");
         System.out.println(table);
         Node tableName = table.selectSingleNode("@tableName");
@@ -77,11 +77,11 @@ public class ServerGenerator {
         param.put("readOnly", readOnly);
         System.out.println("Params: " + param);
 
-        gen(Domain, param, "service", "service");
-        gen(Domain, param, "controller/admin", "adminController");
-        gen(Domain, param, "req", "saveReq");
-        gen(Domain, param, "req", "queryReq");
-        gen(Domain, param, "resp", "queryResp");
+//        gen(Domain, param, "service", "service");
+//        gen(Domain, param, "controller/admin", "adminController");
+//        gen(Domain, param, "req", "saveReq");
+//        gen(Domain, param, "req", "queryReq");
+//        gen(Domain, param, "resp", "queryResp");
 
         genVue(do_main, param);
     }

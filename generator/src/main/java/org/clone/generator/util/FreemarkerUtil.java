@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class FreemarkerUtil {
 
-    static String ftlPath = "org/clone/generator/src/main/java/org/clone/ftl/";
+    static String ftlPath = "generator/src/main/java/org/clone/generator/ftl/";
 
     static Template temp;
 

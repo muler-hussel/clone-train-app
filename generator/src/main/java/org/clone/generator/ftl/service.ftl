@@ -5,8 +5,8 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.clone.common.resp.PageResp;
-import org.clone.util.org.clone.common.SnowUtil;
+import org.clone.common.response.PageRes;
+import org.clone.common.util.SnowUtil;
 import org.clone.${module}.domain.${Domain};
 import org.clone.${module}.domain.${Domain}Example;
 import org.clone.${module}.mapper.${Domain}Mapper;
@@ -42,7 +42,7 @@ public class ${Domain}Service {
         }
     }
 
-    public PageResp<${Domain}QueryResp> queryList(${Domain}QueryReq req) {
+    public PageRes<${Domain}QueryResp> queryList(${Domain}QueryReq req) {
         ${Domain}Example ${domain}Example = new ${Domain}Example();
         ${domain}Example.setOrderByClause("id desc");
         ${Domain}Example.Criteria criteria = ${domain}Example.createCriteria();
@@ -58,7 +58,7 @@ public class ${Domain}Service {
 
         List<${Domain}QueryResp> list = BeanUtil.copyToList(${domain}List, ${Domain}QueryResp.class);
 
-        PageResp<${Domain}QueryResp> pageResp = new PageResp<>();
+        PageRes<${Domain}QueryResp> pageResp = new PageRes<>();
         pageResp.setTotal(pageInfo.getTotal());
         pageResp.setList(list);
         return pageResp;
