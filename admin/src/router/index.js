@@ -31,6 +31,24 @@ const routes = [
         path: 'job',
         component: () => import('../views/main/batch/job.vue'),
       }]
+    },{
+      path: 'business/',
+      children: [/*{
+        path: 'station',
+        component: () => import('../views/main/business/station.vue'),
+      },*/{
+        path: 'daily-train',
+        component: () => import('../views/main/business/daily-train.vue'),
+      },{
+        path: 'daily-train-station',
+        component: () => import('../views/main/business/daily-train-station.vue'),
+      },{
+        path: 'daily-train-carriage',
+        component: () => import('../views/main/business/daily-train-carriage.vue'),
+      },{
+        path: 'daily-train-seat',
+        component: () => import('../views/main/business/daily-train-seat.vue'),
+      }]
     }]
   }, {
     path: '',

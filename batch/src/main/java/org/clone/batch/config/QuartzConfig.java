@@ -1,5 +1,5 @@
-//package org.clone.batch.config;
-
+// package com.jiawa.train.batch.config;
+//
 // import com.jiawa.train.batch.job.TestJob;
 // import org.quartz.*;
 // import org.springframework.context.annotation.Bean;

@@ -49,7 +49,7 @@ export default defineComponent({
     const onChange = (value) => {
       emit('update:modelValue', value);
       let train = trains.value.filter(item => item.code === value)[0];
-      if (Tool.isNotEmpty(train)) {
+      if (Tool.isEmpty(train)) {
         train = {};
       }
       emit('change', train);

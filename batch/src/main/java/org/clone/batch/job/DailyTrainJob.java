@@ -1,12 +1,11 @@
-/*
 package org.clone.batch.job;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.RandomUtil;
+import jakarta.annotation.Resource;
 import org.clone.batch.feign.BusinessFeign;
 import org.clone.common.response.CommonResponse;
-import jakarta.annotation.Resource;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -23,18 +22,17 @@ public class DailyTrainJob implements Job {
     private static final Logger LOG = LoggerFactory.getLogger(DailyTrainJob.class);
 
     @Resource
-    BusinessFeign businessFeign;
+    private BusinessFeign businessFeign;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        // 增加日志流水号
+
         MDC.put("LOG_ID", System.currentTimeMillis() + RandomUtil.randomString(3));
-        LOG.info("生成15天后的车次数据开始");
+        LOG.info("Start to generate train data 15 days later");
         Date date = new Date();
-        DateTime dateTime = DateUtil.offsetDay(date, 15);
+        DateTime dateTime = DateUtil.offsetDay(date, 14);
         Date offsetDate = dateTime.toJdkDate();
-        CommonResponse<Object> commonResp = businessFeign.genDaily(offsetDate);
-        LOG.info("生成15天后的车次数据结束，结果：{}", commonResp);
+        CommonResponse<Object> commonResponse = businessFeign.genDaily(offsetDate);
+        LOG.info("Generation finished, {}", commonResponse);
     }
 }
-*/

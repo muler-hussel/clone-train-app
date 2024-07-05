@@ -2,7 +2,7 @@
   <p>
     <a-space>
       <a-button type="primary" @click="handleQuery()">Refresh</a-button>
-      <a-button type="primary" @click="onAdd">New</a-button>
+      <a-button type="primary" @click="handleAdd">New</a-button>
     </a-space>
   </p>
   <a-table :dataSource="jobs"
@@ -119,33 +119,6 @@ export default defineComponent({
     }
     ];
 
-
-
-    const onAdd = () => {
-      train.value = {};
-      visible.value = true;
-    };
-
-    const onEdit = (record) => {
-      train.value = window.Tool.copy(record);
-      visible.value = true;
-    };
-
-    const onDelete = (record) => {
-      axios.delete("/business/admin/train/delete/" + record.id).then((response) => {
-        const data = response.data;
-        if (data.success) {
-          notification.success({description: "Delete successfully！"});
-          handleQuery({
-            page: pagination.value.current,
-            size: pagination.value.pageSize,
-          });
-        } else {
-          notification.error({description: data.message});
-        }
-      });
-    };
-
     const handleQuery = () => {
       loading.value = true;
       jobs.value = [];
@@ -167,10 +140,10 @@ export default defineComponent({
     const handleModalOk = () => {
       modalLoading.value = true;
       let url = "add";
-      if (job.value.store()) {
+      if (job.value.state) {
         url = "reschedule";
       }
-      axios.post('/batch/admin/job' + url, job.value).then((response) => {
+      axios.post('/batch/admin/job/' + url, job.value).then((response) => {
         modalLoading.value = false;
         const data = response.data;
         if (data.success) {

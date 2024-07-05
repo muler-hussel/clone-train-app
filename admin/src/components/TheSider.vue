@@ -2,7 +2,7 @@
   <a-layout-sider width="200" style="background: #fff">
     <a-menu
         v-model:selectedKeys="selectedKeys"
-        :open-keys="['batch', 'base']"
+        :open-keys="['batch', 'base', 'business']"
         mode="inline"
         :style="{ height: '100%', borderRight: 0 }"
     >
@@ -55,6 +55,39 @@
         <a-menu-item key="/base/train-seat">
           <router-link to="/base/train-seat">
             <user-outlined /> &nbsp; Train Seat
+          </router-link>
+        </a-menu-item>
+      </a-sub-menu>
+      <a-sub-menu key="business">
+        <template #title>
+          <span>
+            <UnorderedListOutlined />
+            Basic Data
+          </span>
+        </template>
+        <a-menu-item key="/business/daily-station">
+          <router-link to="/business/daily-station">
+            <user-outlined /> &nbsp; Daily Station
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="/business/daily-train">
+          <router-link to="/business/daily-train">
+            <user-outlined /> &nbsp; Daily Train
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="/business/daily-train-station">
+          <router-link to="/business/daily-train-station">
+            <user-outlined /> &nbsp; Daily Train Station
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="/business/daily-train-carriage">
+          <router-link to="/business/daily-train-carriage">
+            <user-outlined /> &nbsp; Daily Train Carriage
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="/business/daily-train-seat">
+          <router-link to="/business/daily-train-seat">
+            <user-outlined /> &nbsp; Daily Train Seat
           </router-link>
         </a-menu-item>
       </a-sub-menu>
