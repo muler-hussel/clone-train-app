@@ -2,7 +2,7 @@
   <a-layout-sider width="200" style="background: #fff">
     <a-menu
         v-model:selectedKeys="selectedKeys"
-        :open-keys="['batch', 'base', 'business']"
+        :open-keys="['batch', 'base', 'business', 'member']"
         mode="inline"
         :style="{ height: '100%', borderRight: 0 }"
     >
@@ -24,7 +24,19 @@
           </router-link>
         </a-menu-item>
       </a-sub-menu>
-
+      <a-sub-menu key="member">
+        <template #title>
+          <span>
+            <UnorderedListOutlined />
+            Membership Management
+          </span>
+        </template>
+        <a-menu-item key="/member/ticket">
+          <router-link to="/member/ticket">
+            <MenuUnfoldOutlined /> Member Ticket
+          </router-link>
+        </a-menu-item>
+      </a-sub-menu>
       <a-sub-menu key="base">
         <template #title>
           <span>
@@ -62,12 +74,17 @@
         <template #title>
           <span>
             <UnorderedListOutlined />
-            Basic Data
+            Daily Data
           </span>
         </template>
-        <a-menu-item key="/business/daily-station">
-          <router-link to="/business/daily-station">
-            <user-outlined /> &nbsp; Daily Station
+        <a-menu-item key="/business/daily-train-ticket">
+          <router-link to="/business/daily-train-ticket">
+            <user-outlined /> &nbsp; Ticket Stock
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="/business/confirm-order">
+          <router-link to="/business/confirm-order">
+            <user-outlined /> &nbsp; Order
           </router-link>
         </a-menu-item>
         <a-menu-item key="/business/daily-train">

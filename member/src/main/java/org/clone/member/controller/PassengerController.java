@@ -2,14 +2,16 @@ package org.clone.member.controller;
 
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
+import org.clone.common.context.LoginMemberContext;
+import org.clone.common.response.CommonResponse;
+import org.clone.common.response.PageRes;
 import org.clone.member.request.PassengerQueryReq;
 import org.clone.member.request.PassengerSaveRequest;
 import org.clone.member.response.PassengerQueryRes;
 import org.clone.member.service.PassengerService;
-import org.clone.common.context.LoginMemberContext;
-import org.clone.common.response.CommonResponse;
-import org.clone.common.response.PageRes;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/passenger")
@@ -35,5 +37,11 @@ public class PassengerController {
     public CommonResponse<Object> delete (@PathVariable Long id) {
         passengerService.delete(id);
         return new CommonResponse<>();
+    }
+
+    @GetMapping("/query-mine")
+    public CommonResponse<List<PassengerQueryRes>> queryMime() {
+        List<PassengerQueryRes> list = passengerService.queryMine();
+        return new CommonResponse<>(list);
     }
 }

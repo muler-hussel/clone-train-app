@@ -32,11 +32,20 @@ const routes = [
         component: () => import('../views/main/batch/job.vue'),
       }]
     },{
+      path: 'member/',
+      children: [{
+        path: 'ticket',
+        component: () => import('../views/main/member/ticket.vue'),
+      }]
+    },{
       path: 'business/',
-      children: [/*{
-        path: 'station',
-        component: () => import('../views/main/business/station.vue'),
-      },*/{
+      children: [{
+        path: 'daily-train-ticket',
+        component: () => import('../views/main/business/daily-train-ticket.vue'),
+      },{
+        path: 'confirm-order',
+        component: () => import('../views/main/business/confirm-order.vue'),
+      },{
         path: 'daily-train',
         component: () => import('../views/main/business/daily-train.vue'),
       },{

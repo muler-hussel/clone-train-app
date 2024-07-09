@@ -1,7 +1,11 @@
+PASSENGER_TYPE={ADULT:{code:"1",desc:"Adult"},CHILD:{code:"2",desc:"Child"},STUDENT:{code:"3",desc:"Student"}};
 TRAIN_TYPE={G:{code:"B",desc:"Bullet Train",priceRate:"1.2"},D:{code:"N",desc:"Normal Train",priceRate:"1"},K:{code:"G",desc:"Green Train",priceRate:"0.8"}};
 SEAT_TYPE={FC:{code:"1",desc:"First Class",price:"0.4"},SC:{code:"2",desc:"Second Class",price:"0.3"},SS:{code:"3",desc:"Soft Sleeper",price:"0.6"},HS:{code:"4",desc:"Hard Sleeper",price:"0.5"}};
 SEAT_COL={FC_A:{code:"A",desc:"A",type:"1"},FC_C:{code:"C",desc:"C",type:"1"},FC_D:{code:"D",desc:"D",type:"1"},FC_F:{code:"F",desc:"F",type:"1"},SC_A:{code:"A",desc:"A",type:"2"},SC_B:{code:"B",desc:"B",type:"2"},SC_C:{code:"C",desc:"C",type:"2"},SC_D:{code:"D",desc:"D",type:"2"},SC_F:{code:"F",desc:"F",type:"2"},HS_U:{code:"Upper",desc:"Upper",type:"4"},HS_M:{code:"Middle",desc:"Middle",type:"4"},HS_D:{code:"Down",desc:"Down",type:"4"},SS_U:{code:"Upper",desc:"Upper",type:"3"},SS_D:{code:"Down",desc:"Down",type:"3"}};
+CONFIRM_ORDER_STATUS={INIT:{code:"I",desc:"Initial"},PENDING:{code:"P",desc:"Processing"},SUCCESS:{code:"S",desc:"Succeed"},FAILURE:{code:"F",desc:"Fail"},EMPTY:{code:"E",desc:"Out of stock"},CANCEL:{code:"C",desc:"Canceled"}};
 
+PASSENGER_TYPE_ARRAY=[{code:"1",desc:"Adult"},{code:"2",desc:"Child"},{code:"3",desc:"Student"}];
 TRAIN_TYPE_ARRAY=[{code:"B",desc:"Bullet Train",priceRate:"1.2"},{code:"N",desc:"Normal Train",priceRate:"1"},{code:"G",desc:"Green Train",priceRate:"0.8"}];
 SEAT_TYPE_ARRAY=[{code:"1",desc:"First Class",price:"0.4"},{code:"2",desc:"Second Class",price:"0.3"},{code:"3",desc:"Soft Sleeper",price:"0.6"},{code:"4",desc:"Hard Sleeper",price:"0.5"}];
 SEAT_COL_ARRAY=[{code:"A",desc:"A",type:"1"},{code:"C",desc:"C",type:"1"},{code:"D",desc:"D",type:"1"},{code:"F",desc:"F",type:"1"},{code:"A",desc:"A",type:"2"},{code:"B",desc:"B",type:"2"},{code:"C",desc:"C",type:"2"},{code:"D",desc:"D",type:"2"},{code:"F",desc:"F",type:"2"},{code:"Upper",desc:"Upper",type:"4"},{code:"Middle",desc:"Middle",type:"4"},{code:"Down",desc:"Down",type:"4"},{code:"Upper",desc:"Upper",type:"3"},{code:"Down",desc:"Down",type:"3"}];
+CONFIRM_ORDER_STATUS_ARRAY={INIT:{code:"I",desc:"Initial"},PENDING:{code:"P",desc:"Processing"},SUCCESS:{code:"S",desc:"Succeed"},FAILURE:{code:"F",desc:"Fail"},EMPTY:{code:"E",desc:"Out of stock"},CANCEL:{code:"C",desc:"Canceled"}};

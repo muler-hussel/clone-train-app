@@ -44,7 +44,7 @@
       </a-form-item>
       <a-form-item label="Type">
         <a-select v-model:value="passenger.type">
-          <a-select-option v-for="item in PASSENGER_TYPE_ARRAY" :key="item.code">
+          <a-select-option v-for="item in PASSENGER_TYPE_ARRAY" :key="item.code" value="item.code">
             {{item.desc}}
           </a-select-option>
         </a-select>

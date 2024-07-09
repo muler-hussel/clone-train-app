@@ -2,12 +2,12 @@ package org.clone.business.enums;
 
 public enum ConfirmOrderStatusEnum {
 
-    INIT("I", "初始"),
-    PENDING("P", "处理中"),
-    SUCCESS("S", "成功"),
-    FAILURE("F", "失败"),
-    EMPTY("E", "无票"),
-    CANCEL("C", "取消");
+    INIT("I", "Initial"),
+    PENDING("P", "Processing"),
+    SUCCESS("S", "Succeed"),
+    FAILURE("F", "Fail"),
+    EMPTY("E", "Out of stock"),
+    CANCEL("C", "Canceled");
 
     private String code;
 

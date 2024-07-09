@@ -15,6 +15,16 @@
           <coffee-outlined /> &nbsp; Passengers
         </router-link>
       </a-menu-item>
+      <a-menu-item key="/ticket">
+        <router-link to="/ticket">
+          <coffee-outlined /> &nbsp; Ticket Stock
+        </router-link>
+      </a-menu-item>
+      <a-menu-item key="/my-ticket">
+        <router-link to="/my-ticket">
+          <coffee-outlined /> &nbsp; My Tickets
+        </router-link>
+      </a-menu-item>
     </a-menu>
   </a-layout-sider>
 </template>

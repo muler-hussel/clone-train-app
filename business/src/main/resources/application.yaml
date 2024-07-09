@@ -13,7 +13,7 @@ spring:
     name: business
 
 mybatis:
-  mapper-locations: classpath:/mapper/*.xml
+  mapper-locations: classpath:/mapper/**/*.xml
 logging:
   level:
     org:
