@@ -11,3 +11,29 @@ GET http://localhost:8002/business/admin/train/gen-seat/B1
 Accept: application/json
 
 ###
+GET http://localhost:8000/business/admin/train/query-all
+Accept: application/json
+
+###
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list?page=1&size=5&trainCode=B1&start=广州&end=昆山
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list2?page=1&size=5&trainCode=B1&start=广州&end=昆山
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/business/admin/daily-train-ticket/query-list3?page=1&size=5&trainCode=B1&start=广州&end=昆山
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/business/redis/set/123/test1
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/business/redis/get/123
+Content-Type: application/json

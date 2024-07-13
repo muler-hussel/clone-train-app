@@ -11,9 +11,22 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: business
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cache:
+    type: redis #spring自身的cache设置为redis 能提高访问速度 mysql 2000/s → redis 10万/s； 能多节点共享，机器重启不会丢失数据。如登录信息适合放redis而不是session
+    redis:
+      use-key-prefix: true
+      key-prefix: train_cache_
+      cache-null-values: true #false， 缓存如果为空直接报错，允许为空则可以查到空后到数据库查
+      time-to-live: 60s #缓存保存时长
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*.xml
+  configuration:
+    local-cache-scope: statement #没执行一次sql就清空缓存，即关闭一级缓存
 logging:
   level:
     org:
