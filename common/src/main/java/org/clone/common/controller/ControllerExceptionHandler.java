@@ -24,7 +24,12 @@ public class ControllerExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public CommonResponse exceptionHandler(Exception e) {
+    public CommonResponse exceptionHandler(Exception e) throws Exception{
+        //LOG.info("seata ID: {}", RootContext.getXID());
+        //如果在一次全局事务中出现异常，则不要包装返回值，直接抛给调用方，调用方回滚事务
+//        if (StrUtil.isNotBlank(RootContext.getXID())) {
+//            throw e;
+//        }
         CommonResponse commonResp = new CommonResponse();
         LOG.error("Exception：", e);
         commonResp.setSuccess(false);

@@ -30,8 +30,8 @@ public class MemberTicketReq {
      * 
      */
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
-    @NotNull(message = "【date】cannot be null")
-    private Date date;
+    @NotNull(message = "【trainDate】cannot be null")
+    private Date trainDate;
 
     /**
      * 
@@ -48,14 +48,14 @@ public class MemberTicketReq {
     /**
      * 
      */
-    @NotBlank(message = "【row】cannot be blank")
-    private String row;
+    @NotBlank(message = "【seatRow】cannot be blank")
+    private String seatRow;
 
     /**
      * 
      */
-    @NotBlank(message = "【col】cannot be blank")
-    private String col;
+    @NotBlank(message = "【seatCol】cannot be blank")
+    private String seatCol;
 
     /**
      * 
@@ -125,12 +125,12 @@ public class MemberTicketReq {
         this.passengerName = passengerName;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getTrainDate() {
+        return trainDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTrainDate(Date trainDate) {
+        this.trainDate = trainDate;
     }
 
     public String getTrainCode() {
@@ -149,20 +149,20 @@ public class MemberTicketReq {
         this.carriageIndex = carriageIndex;
     }
 
-    public String getRow() {
-        return row;
+    public String getSeatRow() {
+        return seatRow;
     }
 
-    public void setRow(String row) {
-        this.row = row;
+    public void setSeatRow(String seatRow) {
+        this.seatRow = seatRow;
     }
 
-    public String getCol() {
-        return col;
+    public String getSeatCol() {
+        return seatCol;
     }
 
-    public void setCol(String col) {
-        this.col = col;
+    public void setSeatCol(String col) {
+        this.seatCol = col;
     }
 
     public String getDeparture() {
@@ -230,11 +230,11 @@ public class MemberTicketReq {
         sb.append(", memberId=").append(memberId);
         sb.append(", passengerId=").append(passengerId);
         sb.append(", passengerName=").append(passengerName);
-        sb.append(", date=").append(date);
+        sb.append(", trainDate=").append(trainDate);
         sb.append(", trainCode=").append(trainCode);
         sb.append(", carriageIndex=").append(carriageIndex);
-        sb.append(", row=").append(row);
-        sb.append(", col=").append(col);
+        sb.append(", seatRow=").append(seatRow);
+        sb.append(", seatCol=").append(seatCol);
         sb.append(", departure=").append(departure);
         sb.append(", departureTime=").append(departureTime);
         sb.append(", destination=").append(destination);

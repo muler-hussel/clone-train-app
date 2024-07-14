@@ -7,8 +7,34 @@ spring:
     nacos:
       config:
         server-addr: 127.0.0.1:8848 #nacos server 地址
-        file-extension: yaml #配置中心文件后缀,nacos根据环境读的配置dataId: member-dev.yaml
+        file-extension: properties #配置中心文件后缀,nacos根据环境读的配置dataId: member-dev.properties
         namespace: 517e6465-29b6-4cc0-8a0f-1cdecd504981 #命名空间
       discovery:
         server-addr: 127.0.0.1:8848 #注册中心地址
         namespace: 517e6465-29b6-4cc0-8a0f-1cdecd504981
+seata:
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: 517e6465-29b6-4cc0-8a0f-1cdecd504981
+      username: nacos
+      password: nacos
+  #tx-service-group: train-group #事务组名称
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: SEATA_GROUP
+      namespace: 517e6465-29b6-4cc0-8a0f-1cdecd504981
+      username: nacos
+      password: nacos
+      #service 配置移入nacos的seataServer.properties
+      data-id: seataServer.properties
+#  service:
+#    vgroup-mapping:
+#      train-group: default #事务组和seata集群做关联
+#    grouplist:
+#      default: 127.0.0.1:8091 #seata集群对应的机器

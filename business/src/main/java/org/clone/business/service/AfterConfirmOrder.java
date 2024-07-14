@@ -16,7 +16,6 @@ import org.clone.common.response.CommonResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -44,11 +43,13 @@ public class AfterConfirmOrder {
     // 余票详情表修改余票；
     // 为会员增加购票记录
     // 更新确认订单为成功
-    @Transactional
+    //@Transactional
+    //@GlobalTransactional
     public void afterConfirm(DailyTrainTicket dailyTrainTicket,
                              List<DailyTrainSeat> finalSeatList,
                              List<ConfirmOrderTicketReq> tickets,
-                             ConfirmOrder confirmOrder) {
+                             ConfirmOrder confirmOrder) throws Exception {
+        //LOG.info("seata ID: {}", RootContext.getXID());
         for (int j = 0; j < finalSeatList.size(); j++) {
             DailyTrainSeat dailyTrainSeat = finalSeatList.get(j);
             DailyTrainSeat seatForUpdate = new DailyTrainSeat();
@@ -93,11 +94,11 @@ public class AfterConfirmOrder {
             memberTicketReq.setMemberId(LoginMemberContext.getId());
             memberTicketReq.setPassengerId(tickets.get(j).getPassengerId());
             memberTicketReq.setPassengerName(tickets.get(j).getPassengerName());
-            memberTicketReq.setDate(dailyTrainTicket.getDate());
+            memberTicketReq.setTrainDate(dailyTrainTicket.getDate());
             memberTicketReq.setTrainCode(dailyTrainTicket.getTrainCode());
             memberTicketReq.setCarriageIndex(dailyTrainSeat.getCarriageIndex());
-            memberTicketReq.setRow(dailyTrainSeat.getRow());
-            memberTicketReq.setCol(dailyTrainSeat.getCol());
+            memberTicketReq.setSeatRow(dailyTrainSeat.getRow());
+            memberTicketReq.setSeatCol(dailyTrainSeat.getCol());
             memberTicketReq.setDeparture(dailyTrainTicket.getStart());
             memberTicketReq.setDepartureTime(dailyTrainTicket.getStartTime());
             memberTicketReq.setDestination(dailyTrainTicket.getEnd());
@@ -111,6 +112,12 @@ public class AfterConfirmOrder {
             confirmOrderForUpdate.setUpdateTime(new Date());
             confirmOrderForUpdate.setStatus(ConfirmOrderStatusEnum.SUCCESS.getCode());
             confirmOrderMapper.updateByPrimaryKeySelective(confirmOrderForUpdate);
+
+             //模拟调用方出现异常
+             //Thread.sleep(10000);
+//             if (1 == 1) {
+//                 throw new Exception("测试异常");
+//             }
         }
     }
 

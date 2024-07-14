@@ -37,3 +37,26 @@ Content-Type: application/json
 
 GET http://localhost:8000/business/redis/get/123
 Content-Type: application/json
+
+###
+
+POST http://localhost:8000/business/confirm-order/done
+Content-Type: application/json
+token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE3MjA5NDI3MzUsIm1vYmlsZSI6IjEzMDAwMDAwMDAwIiwiaWQiOjE4MDQ0NDczNjY0OTM5MDA4MDAsImV4cCI6MTcyMTAyOTEzNSwiaWF0IjoxNzIwOTQyNzM1fQ.TU7Heg5zz3Shd-WBKgi4n8W7263N4X5-0dPg9lwWOdA
+
+{
+  "dailyTrainTicketId":1810684004345712640,
+  "date":"2024-07-24",
+  "departure":"广州",
+  "destination":"昆山",
+  "tickets":[{
+    "passengerId":1805641723926417408,
+    "passengerName":"dftj",
+    "passengerType":"1",
+    "seat":"A1",
+    "seatTypeCode":"2"
+  }],
+  "trainCode":"B1"
+}
+
+###
