@@ -14,6 +14,7 @@ public enum BusinessExceptionEnum {
 
     CONFIRM_ORDER_TICKET_COUNT_ERROR("Not enough ticket left"),
     CONFIRM_ORDER_EXCEPTION("Server is busy, please try a moment later"),
+    CONFIRM_ORDER_FLOW_EXCEPTION("Please try a moment later"),
     CONFIRM_ORDER_LOCK_FAIL("Try later");
 
     private String desc;
