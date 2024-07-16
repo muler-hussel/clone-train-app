@@ -49,7 +49,7 @@
     <a-button type="primary" size="large" @click="finishCheckPassenger">Submit</a-button>
   </div>
   <a-modal v-model:visible="visible" title="Please check information below"
-           style="top: 50px; width: 80%" @ok="handleOk">
+           style="top: 50px; width: 80%" @ok="showImageCodeModal">
     <div class="order-tickets">
       <a-row class="order-tickets-header" v-if="tickets.length > 0">
         <a-col :span="6">Passenger</a-col>
@@ -95,9 +95,25 @@
         <div style="color: #999999">You can choose {{tickets.length}} seats.</div>
       </div>
       <br/>
-      Purchased tickets: {{tickets}}
-      Chosen seats: {{chooseSeatObj}}
+<!--      Purchased tickets: {{tickets}}-->
+<!--      Chosen seats: {{chooseSeatObj}}-->
     </div>
+  </a-modal>
+
+<!--验证码-->
+  <a-modal v-model:visible="imageCodeModalVisible" :title="null" :footer="null" :closable="false"
+           style="top: 50px; width: 400px">
+    <p style="text-align: center; font-weight: bold; font-size: 19px">
+      Validation
+    </p>
+    <p>
+      <a-input v-model:value="imageCode" placeholder="Validation">
+        <template #suffix>
+          <img v-show="!!imageCodeSrc" :src="imageCodeSrc" alt="validation" v-on:click="loadImageCode()" />
+        </template>
+      </a-input>
+    </p>
+    <a-button type="primary" block @click="handleOk">Please type in validation</a-button>
   </a-modal>
 </template>
 
@@ -253,6 +269,10 @@ export default defineComponent ({
     }
 
     const handleOk = () => {
+      if (Tool.isEmpty(imageCode.value)) {
+        notification.error({ description: 'Validation cannot be null' });
+        return;
+      }
       console.log("Chosen seats: ", chooseSeatObj.value);
 
       // 设置每张票的座位
@@ -284,7 +304,9 @@ export default defineComponent ({
         trainCode: dailyTrainTicket.trainCode,
         departure: dailyTrainTicket.start,
         destination: dailyTrainTicket.end,
-        tickets: tickets.value
+        tickets: tickets.value,
+        imageCodeToken: imageCodeToken.value,
+        imageCode: imageCode.value,
       }).then((response) => {
         let data = response.data;
         if (data.success) {
@@ -293,6 +315,21 @@ export default defineComponent ({
           notification.error({ description: data.message });
         }
       });
+    }
+
+    /*验证码*/
+    const imageCodeModalVisible = ref();
+    const imageCodeToken = ref();
+    const imageCodeSrc = ref();
+    const imageCode = ref();
+    /*加载图形验证码*/
+    const loadImageCode = () => {
+      imageCodeToken.value = Tool.uuid(8);
+      imageCodeSrc.value = process.env.VUE_APP_SERVER + '/business/kaptcha/image-code/' + imageCodeToken.value;
+    };
+    const showImageCodeModal = () => {
+      loadImageCode();
+      imageCodeModalVisible.value = true;
     }
 
     onMounted(() => {
@@ -313,7 +350,13 @@ export default defineComponent ({
       chooseSeatObj,
       chooseSeatType,
       SEAT_COL_ARRAY,
-      handleOk
+      handleOk,
+      imageCodeSrc,
+      imageCodeToken,
+      imageCodeModalVisible,
+      imageCode,
+      showImageCodeModal,
+      loadImageCode
     };
   },
 });

@@ -40,6 +40,9 @@ const routes = [
     },{
       path: 'business/',
       children: [{
+        path: 'sk-token',
+        component: () => import('../views/main/business/sk-token.vue'),
+      },{
         path: 'daily-train-ticket',
         component: () => import('../views/main/business/daily-train-ticket.vue'),
       },{

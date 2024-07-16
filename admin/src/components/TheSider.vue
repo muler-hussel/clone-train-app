@@ -82,6 +82,11 @@
             <user-outlined /> &nbsp; Ticket Stock
           </router-link>
         </a-menu-item>
+        <a-menu-item key="/business/sk-token">
+          <router-link to="/business/sk-token">
+            <user-outlined /> &nbsp; Tokens
+          </router-link>
+        </a-menu-item>
         <a-menu-item key="/business/confirm-order">
           <router-link to="/business/confirm-order">
             <user-outlined /> &nbsp; Order

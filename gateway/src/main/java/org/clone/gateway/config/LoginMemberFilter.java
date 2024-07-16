@@ -22,8 +22,9 @@ public class LoginMemberFilter implements Ordered, GlobalFilter {
         if (path.contains("/admin")
                 || path.contains("/redis")
                 || path.contains("/hello")
-                || path.contains("member/member/login")
-                || path.contains("member/member/send-code")) {
+                || path.contains("/member/member/login")
+                || path.contains("/member/member/send-code")
+                || path.contains("/business/kaptcha")) {
             LOG.info("Do not need login validation: {}", path);
             return chain.filter(exchange);
         } else {
