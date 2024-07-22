@@ -115,6 +115,17 @@
     </p>
     <a-button type="primary" block @click="handleOk">Please type in validation</a-button>
   </a-modal>
+  <a-modal v-model:visible="lineModalVisible" :title="null" :footer="null" :closable="false"
+           style="top: 50px; width: 400px">
+    <div class="book-line">
+      <div v-show="confirmOrderLineCount < 0">
+        <loading-outlined /> Order is under process...
+      </div>
+      <div v-show="confirmOrderLineCount >= 0">
+        <loading-outlined /> There are {{confirmOrderLineCount}} users ahead of you.
+      </div>
+    </div>
+  </a-modal>
 </template>
 
 <script>
@@ -142,6 +153,10 @@ export default defineComponent ({
     const PASSENGER_TYPE_ARRAY = window.PASSENGER_TYPE_ARRAY;
     const seatTypes = [];
     const visible = ref(false);
+    const lineModalVisible = ref(false);
+    const confirmOrderId = ref();
+    const confirmOrderLineCount = ref(-1);
+
     for (let KEY in SEAT_TYPE) {
       let key = KEY.toLowerCase();
       if (dailyTrainTicket[key] >= 0) {
@@ -310,12 +325,55 @@ export default defineComponent ({
       }).then((response) => {
         let data = response.data;
         if (data.success) {
-          notification.success({ description: "Order successfully" });
+          //notification.success({ description: "Order successfully" });
+          visible.value = false;
+          imageCodeModalVisible.value = false;
+          lineModalVisible.value = true;
+          confirmOrderId.value = data.content;
+          queryLineCount();
         } else {
           notification.error({ description: data.message });
         }
       });
     }
+
+    /*定时查询订单状态*/
+    //确认订单后定时查询
+    let queryLineCountInterval;
+
+    //定时查询订单结果/排队情况
+    const queryLineCount = () => {
+      confirmOrderLineCount.value = -1;
+      queryLineCountInterval = setInterval(function () {
+        axios.get("/business/confirm-order/query-line-count/" + confirmOrderId.value).then((response) => {
+          let data = response.data;
+          if (data.success) {
+            let result = data.content;
+            switch (result) {
+              case -1:
+                notification.success({description: "Order successfully"});
+                lineModalVisible.value = false;
+                clearInterval(queryLineCountInterval);
+                break;
+              case -2:
+                notification.error({description: "Fail to order"});
+                lineModalVisible.value = false;
+                clearInterval(queryLineCountInterval);
+                break;
+              case -3:
+                notification.error({description: "No more tickets"});
+                lineModalVisible.value = false;
+                clearInterval(queryLineCountInterval);
+                break;
+              default:
+                confirmOrderLineCount.value = result;
+            }
+          } else {
+            notification.error({description: data.message});
+          }
+        });
+      }, 500);
+    };
 
     /*验证码*/
     const imageCodeModalVisible = ref();
@@ -356,7 +414,10 @@ export default defineComponent ({
       imageCodeModalVisible,
       imageCode,
       showImageCodeModal,
-      loadImageCode
+      loadImageCode,
+      lineModalVisible,
+      confirmOrderId,
+      confirmOrderLineCount
     };
   },
 });

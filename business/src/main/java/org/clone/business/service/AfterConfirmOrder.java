@@ -10,7 +10,6 @@ import org.clone.business.mapper.ConfirmOrderMapper;
 import org.clone.business.mapper.DailyTrainSeatMapper;
 import org.clone.business.mapper.cust.DailyTrainTicketMapperCust;
 import org.clone.business.req.ConfirmOrderTicketReq;
-import org.clone.common.context.LoginMemberContext;
 import org.clone.common.request.MemberTicketReq;
 import org.clone.common.response.CommonResponse;
 import org.slf4j.Logger;
@@ -91,7 +90,7 @@ public class AfterConfirmOrder {
                     minEndIndex, maxEndIndex);
             //调用会员服务接口，为会员增加车票
             MemberTicketReq memberTicketReq = new MemberTicketReq();
-            memberTicketReq.setMemberId(LoginMemberContext.getId());
+            memberTicketReq.setMemberId(confirmOrder.getMemberId());
             memberTicketReq.setPassengerId(tickets.get(j).getPassengerId());
             memberTicketReq.setPassengerName(tickets.get(j).getPassengerName());
             memberTicketReq.setTrainDate(dailyTrainTicket.getDate());
