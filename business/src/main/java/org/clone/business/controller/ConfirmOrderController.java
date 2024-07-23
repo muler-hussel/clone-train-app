@@ -67,6 +67,12 @@ public class ConfirmOrderController {
         Integer count = confirmOrderService.queryLineCount(id);
         return new CommonResponse<>(count);
     }
+
+    @GetMapping("/cancel/{id}")
+    public CommonResponse<Integer> cancel(@PathVariable Long id) {
+        Integer count = confirmOrderService.cancel(id);
+        return new CommonResponse<>(count);
+    }
     public CommonResponse<Object> doneConfirmBlock(ConfirmOrderDoneReq req, BlockException e) {
         LOG.info("Order is restricted: {}", req);
         //throw new BusinessException(CONFIRM_ORDER_FLOW_EXCEPTION);

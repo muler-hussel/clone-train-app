@@ -74,8 +74,8 @@ export default defineComponent({
     },
     {
       title: 'Date',
-      dataIndex: 'date',
-      key: 'date',
+      dataIndex: 'trainDate',
+      key: 'trainDate',
     },
     {
       title: 'TrainCode',
@@ -89,13 +89,13 @@ export default defineComponent({
     },
     {
       title: 'Row',
-      dataIndex: 'row',
-      key: 'row',
+      dataIndex: 'seatRow',
+      key: 'seatRow',
     },
     {
       title: 'Col',
-      dataIndex: 'col',
-      key: 'col',
+      dataIndex: 'seatCol',
+      key: 'seatCol',
     },
     {
       title: 'Departure',
@@ -121,6 +121,11 @@ export default defineComponent({
       title: 'SeatType',
       dataIndex: 'seatType',
       key: 'seatType',
+    },
+    {
+      title: 'CreateTime',
+      dataIndex: 'createTime',
+      key: 'createTime',
     },
     ];
 

@@ -1,7 +1,7 @@
 <template>
   <p>
     <a-space>
-      <a-date-picker v-model:value="params.date" value-format="YYYY-MM-DD" placeholder="Select date" />
+      <a-date-picker v-model:value="params.date" value-format="YYYY-MM-DD" placeholder="Select date" :disabled-date="disabledDate" />
       <station-select-view v-model="params.start" width="200px"></station-select-view>
       <station-select-view v-model="params.end" width="200px"></station-select-view>
       <a-button type="primary" @click="handleQuery()">Search</a-button>
@@ -14,7 +14,10 @@
            :loading="loading">
     <template #bodyCell="{ column, record }">
       <template v-if="column.dataIndex === 'operation'">
-        <a-button type="primary" @click="toOrder(record)">Order</a-button>
+        <a-space>
+          <a-button type="primary" @click="toOrder(record)" :disabled="isExpire(record)">{{isExpire(record) ? "Out Of Date" : "Order"}}</a-button>
+          <a-button type="primary" @click="showStation(record)">All Stations</a-button>
+        </a-space>
       </template>
       <template v-else-if="column.dataIndex === 'station'">
         {{record.start}}<br/>
@@ -71,6 +74,29 @@
       </template>
     </template>
   </a-table>
+<!--途经车站-->
+  <a-modal style="top: 30px" v-model:visible="visible" :title="null" :footer="null" closable="false">
+    <a-table :data-source="stations" :pagination="false">
+      <a-table-column key="index" title="index" data-index="index" />
+      <a-table-column key="name" title="name" data-index="name" />
+      <a-table-column key="arriveTime" title="arrive time" data-index="inTime">
+        <template #default="{ record }">
+          {{record.index === 0 ? '-' : record.inTime}}
+        </template>
+      </a-table-column>
+      <a-table-column key="departTime" title="depart time" data-index="outTime">
+        <template #default="{ record }">
+          {{record.index === (stations.length - 1) ? '-' : record.outTime}}
+        </template>
+      </a-table-column>
+      <a-table-column key="stopTime" title="stop time" data-index="stopTime">
+        <template #default="{ record }">
+          {{record.index === (stations.length - 1) || record.index === 0 ? '-' : record.stopTime}}
+        </template>
+      </a-table-column>
+    </a-table>
+
+  </a-modal>
 </template>
 
 <script>
@@ -228,6 +254,28 @@ export default defineComponent({
       router.push("/order");
     }
 
+    const stations = ref([]);
+    const showStation = (record) => {
+      visible.value = true;
+      axios.get("/business/daily-train-station/query-by-train-code", {
+        params: {
+          date: record.date,
+          trainCode: record.trainCode
+        }
+      }).then((response) => {
+        let data = response.data;
+        if (data.success) {
+          stations.value = data.content;
+        } else {
+          notification.error({description: data.message});
+        }
+      });
+    };
+
+    const disabledDate = current => {
+      return current && (current <= dayjs().add(-1, 'day') || current > dayjs().add(14, 'day'));
+    };
+
     onMounted(() => {
       params.value = SessionStorage.get(SESSION_TICKET_PARAMS) || {};
       if (Tool.isNotEmpty(params.value)) {
@@ -237,6 +285,15 @@ export default defineComponent({
         });
       }
     });
+
+    const isExpire = (record) => {
+      //标准时间 2000/01/01 00：00：00
+      let startDateTimeString = record.date.replace(/-/g, "/") + " " + record.startTime;
+      let startDateTime = new Date(startDateTimeString);
+
+      let now = new Date();
+      return now.valueOf() >= startDateTime.valueOf();
+    }
 
     return {
       dailyTrainTicket,
@@ -249,7 +306,11 @@ export default defineComponent({
       loading,
       params,
       calDuration,
-      toOrder
+      toOrder,
+      showStation,
+      stations,
+      disabledDate,
+      isExpire
     };
   },
 });

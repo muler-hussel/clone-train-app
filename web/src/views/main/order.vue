@@ -125,6 +125,8 @@
         <loading-outlined /> There are {{confirmOrderLineCount}} users ahead of you.
       </div>
     </div>
+    <br/>
+    <a-button type="default" @click="onCancelOrder">Cancel Order</a-button>
   </a-modal>
 </template>
 
@@ -390,6 +392,24 @@ export default defineComponent ({
       imageCodeModalVisible.value = true;
     }
 
+    const onCancelOrder = () => {
+      axios.get("/business/confirm-order/cancel/" + confirmOrderId.value).then((response) => {
+        let data = response.data;
+        if (data.success) {
+          let result = data.content;
+          if (result === 1) {
+            notification.success({description: "Cancel successfully"});
+            clearInterval(queryLineCountInterval);
+            lineModalVisible.value = false;
+          } else {
+            notification.error({description: "Fail to cancel order"});
+          }
+        } else {
+          notification.error({description: data.message});
+        }
+      });
+    };
+
     onMounted(() => {
       handleQueryPassenger();
     });
@@ -417,7 +437,8 @@ export default defineComponent ({
       loadImageCode,
       lineModalVisible,
       confirmOrderId,
-      confirmOrderLineCount
+      confirmOrderLineCount,
+      onCancelOrder
     };
   },
 });
